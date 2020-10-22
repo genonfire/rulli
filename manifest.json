@@ -1,0 +1,29 @@
+{
+  "manifest_version": 2,
+  "name": "Ruliweb Unwanted Link Lazy Irradiator (Rulli)",
+  "version": "1.0",
+  "description": "(룰리) 루리웹의 링크 변조를 방지합니다.",
+  "icons": {
+    "128": "icon.png",
+    "16": "icon.png",
+    "32": "icon.png",
+    "48": "icon.png"
+  },
+  "permissions": [
+    "http://api.gencode.me/",
+    "storage"
+  ],
+  "browser_action": {
+    "default_icon": "icon.png"
+  },
+  "background": {
+    "scripts": ["background.js", "jquery-3.5.1.min.js"],
+    "persistent": false
+  },
+  "content_scripts": [{
+    "matches": [ "https://*.ruliweb.com/*" ],
+    "js": ["content.js"],
+    "run_at": "document_idle",
+    "all_frames": true
+  }]
+}
