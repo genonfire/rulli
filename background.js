@@ -1,40 +1,35 @@
 chrome.runtime.onStartup.addListener(function () {
   chrome.storage.sync.get({
     version: 1,
-    hotdealSourceURL: '#board_read > div > div.board_main > div.board_main_view > div.source_url > a'
+    hotdealSourceURL: '#board_read > div > div.board_main > div.board_main_view > div.source_url > a',
+    fmdealSourceURL: '#bd_capture > div.rd_hd.clear > div.board.clear > table > tbody > tr:nth-child(1) > td > div > a',
+    ppomppuSourceURL: 'body > div > div.contents > div.container > div > table:nth-child(n+10) > tbody > tr:nth-child(3) > td > table > tbody > tr > td:nth-child(5) > div > div.sub-top-text-box > div > a'
   }, function(items) {
-    $.ajax({
-      type: 'GET',
-      url: 'http://api.gencode.me/rulli/',
-      crossDomain: false,
-      dataType: 'html',
-      success: function(response) {
-        var data = JSON.parse(response);
-        if (data.selector_version > items.version) {
+    fetch('http://api.gencode.me/rulli/index.php', {
+      method: 'GET'
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.selector_version > items.version) {
           chrome.storage.sync.set({
             version: data.selector_version,
-            hotdealSourceURL: data.selector_hotdeal_sourceurl
+            hotdealSourceURL: data.selector_hotdeal_sourceurl,
+            fmdealSourceURL: data.selector_fmdeal_sourceurl,
+            ppomppuSourceURL: data.selector_ppomppu_sourceurl
           });
         }
-      }
     });
   });
 });
 
 chrome.runtime.onMessage.addListener(function(request, sender, callback) {
-  if (request.action == "xhttp") {
-    $.ajax({
-      type: request.method,
-      url: request.url,
-      crossDomain: false,
-      dataType: 'html',
-      success: function(data) {
-        callback(data);
-      },
-      error: function(XMLHttpRequest, textStatus, errorThrown) {
-        callback();
-      }
-    });
+  if (request.action == 'xhttp') {
+    fetch(request.url, {
+      method: request.method
+    })
+    .then(response => response.json())
+    .then(data => callback(data));
+
     return true;
   }
 });
