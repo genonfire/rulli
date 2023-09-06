@@ -41,7 +41,7 @@ function syncQueryString() {
   chrome.runtime.sendMessage({
     method: 'GET',
     action: 'xhttp',
-    url: 'http://api.gencode.me/rulli/index.php'
+    url: 'http://www.gencode.me/api/rulli/scheme.json'
     }, function(response) {
       chrome.storage.sync.set({
         version: data.selector_version,

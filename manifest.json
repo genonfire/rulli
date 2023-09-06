@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Ruliweb Unwanted Link Lazy Irradiator (Rulli)",
   "description": "(룰리) 뽐뿌, 루리웹, 펨코 핫딜의 링크 변조를 방지합니다.",
-  "version": "2.0",
+  "version": "2.1",
   "icons": {
     "128": "icon.png",
     "16": "icon.png",
@@ -26,6 +26,6 @@
     "storage"
   ],
   "host_permissions": [
-    "http://api.gencode.me/"
+    "http://www.gencode.me/"
   ]
 }
