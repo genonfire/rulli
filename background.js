@@ -5,7 +5,7 @@ chrome.runtime.onStartup.addListener(function () {
     fmdealSourceURL: '#bd_capture > div.rd_hd.clear > div.board.clear > table > tbody > tr:nth-child(1) > td > div > a',
     ppomppuSourceURL: 'body > div > div.contents > div.container > div > table:nth-child(n+10) > tbody > tr:nth-child(3) > td > table > tbody > tr > td:nth-child(5) > div > div.sub-top-text-box > div > a'
   }, function(items) {
-    fetch('http://api.gencode.me/rulli/index.php', {
+    fetch('http://www.gencode.me/api/rulli/scheme.json', {
       method: 'GET'
     })
     .then(response => response.json())
